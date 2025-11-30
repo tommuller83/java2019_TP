@@ -1,0 +1,32 @@
+package test_opencv;
+
+import org.opencv.core.Core;
+import org.opencv.core.Mat;
+import org.opencv.imgcodecs.Imgcodecs;
+import org.opencv.imgproc.Imgproc;
+
+public class TestOpenCV {
+    public static void main(String[] args) {
+        // Charger la bibliothèque OpenCV
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+
+        // Chemin vers une image de test (remplace par ton image)
+        String imagePath = "OIP.jpg";
+
+        // Charger l'image
+        Mat image = Imgcodecs.imread(imagePath);
+        if (image.empty()) {
+            System.out.println("Erreur : Impossible de charger l'image.");
+            return;
+        }
+
+        // Convertir en niveaux de gris
+        Mat grayImage = new Mat();
+        Imgproc.cvtColor(image, grayImage, Imgproc.COLOR_BGR2GRAY);
+
+        // Sauvegarder l'image traitée
+        Imgcodecs.imwrite("image_grise.jpg", grayImage);
+
+        System.out.println("Image traitée et sauvegardée !");
+    }
+}
